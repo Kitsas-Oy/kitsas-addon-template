@@ -4,6 +4,7 @@ import { SessionData } from "express-session";
 
 export interface AddonSession extends SessionData {
     call?: AddonCallInfo;
+    data?: { [key: string]: any};
 }
 export async function addonMiddleware(req: Request, res: Response, next: NextFunction) : Promise<void>
 {
@@ -23,6 +24,7 @@ export async function addonMiddleware(req: Request, res: Response, next: NextFun
             return;
         }
         session.call = call;
+        session.data = {};
         next();
     }
 };
@@ -63,5 +65,36 @@ export class Call extends Hook{
     organizationId(): string {
         return this.session.call?.organization?.id || '';
     }
+
+    rights(): string[] {
+        return this.session.call?.rights || [];
+    }
+
+    active(): boolean {
+        return this.rights.length > 0;
+    }
+
+
+    /**
+     * Get session stored custom data
+     * @param key Key of the data
+     * @returns Data or undefined if not found
+     */
+    get(key: string): any {
+        return this.session.data?.[key] || undefined;
+    }
+
+    /**
+     * Store custom data to session
+     * @param key Key of the data
+     * @param value Data value
+     */
+    set(key: string, value: any) {        
+        const oldObject: { [key: string]: any } = this.session.data || {};        
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+        oldObject[key] = value;
+        this.session.data = oldObject;
+    }
+
 
 }
