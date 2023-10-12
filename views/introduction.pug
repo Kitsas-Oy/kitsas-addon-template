@@ -1,0 +1,22 @@
+extends layout.pug 
+
+block content 
+    h1 #{config.appName}
+    p This page shows information about the addon for user who are not activated yet this addon.    
+    h2 Some information about the session (for test use only)
+
+    table.ui.table
+        tbody
+            tr 
+                td User's name 
+                td=info.user.name        
+            tr          
+                td User's ID 
+                td=info.user.id
+            tr 
+                td Organization (bookkeeping) name
+                td=info.organization.name
+            tr
+                td Organization (bookkeeping) id 
+                td=info.organization.id            
+        

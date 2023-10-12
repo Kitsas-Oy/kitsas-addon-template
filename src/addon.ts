@@ -5,22 +5,15 @@ const router = Router();
 
 router.use(addonMiddleware);
 
-router.get('/',  (req : Request, res : Response) => {
+router.get('/',  async (req : Request, res : Response) => {
     const call = new Call(req);
-    
-    const counter = call.get('counter') as number || 0;
-    call.set('counter', counter + 1);
+    const logs = await call.getLogs();
 
-    res.send({
-        userName: call.userName(),
-        userId: call.userId(),
-        organizationName: call.organizationName(),
-        organizationId: call.organizationId(),
-        addonName: call.connection().getName(),
-        rights: call.rights(),
-        active: call.active(),
-        counter: counter,
-    })
+    if( call.active() ) {
+        res.render('main', { logs: logs });
+    } else {
+        res.render('introduction');
+    }
 });
 
 export default router;

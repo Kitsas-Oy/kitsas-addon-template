@@ -1,0 +1,31 @@
+extends layout.pug 
+
+block content 
+    h1 #{config.appName}
+    p Congratulations! You have successfully activated this addon.
+    p Now it is time to make some settings etc.
+    h2 Some information about the session (for test use only)
+  
+    table.ui.table
+        tbody
+            tr 
+                td User's name 
+                td=info.user.name        
+            tr          
+                td User's ID 
+                td=info.user.id
+            tr 
+                td Organization (bookkeeping) name
+                td=info.organization.name
+            tr
+                td Organization (bookkeeping) id 
+                td=info.organization.id     
+
+    h2 Logs    
+    table.ui.table 
+        tbody 
+            each row in logs 
+                tr 
+                    td=row.status
+                    td=row.timestamp
+                    td=row.message
