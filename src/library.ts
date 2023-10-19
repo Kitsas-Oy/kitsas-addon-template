@@ -138,7 +138,7 @@ export class Call extends Hook{
         await this.connection().addNotification(this.organizationId(), type, title, text, category);
     }
 
-    async replaceNotification(type: NotificationType, title: LanguageString, text: LanguageString, category?: string): Promise<void> {
+    async replaceNotification(type: NotificationType, title: LanguageString, text: LanguageString, category: string): Promise<void> {
         // eslint-disable-next-line @typescript-eslint/no-unsafe-call
         await this.connection().replaceNotification(this.organizationId(), type, title, text, category);
     }
