@@ -40,6 +40,6 @@
     "@types/express-session": "^1.17.8",
     "@types/morgan": "^1.9.6",
     "express": "^4.18.2",
-    "kitsas-addon-library": "^0.0.1",
+    "kitsas-addon-library": "^0.0.1"
   }
 }
